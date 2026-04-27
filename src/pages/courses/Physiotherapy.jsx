@@ -40,7 +40,8 @@ const Physiotherapy = () => (
             { icon: '🏪', title: 'Private Clinic Owner' },
             { icon: '🔬', title: 'Clinical Research' },
         ]}
-        iframeLink="https://stobay.ai/rathnam_university/physiotherapy/?type=widget"
+        // iframeLink="https://stobay.ai/rathnam_university/physiotherapy/?type=widget"
+        ChatLink="https://stobay.ai/rathnam_university/physiotherapy/?type=chatbox"
     />
 );
 

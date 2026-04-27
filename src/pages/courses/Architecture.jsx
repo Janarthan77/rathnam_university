@@ -41,7 +41,8 @@ const Architecture = () => (
             { icon: '✈️', title: 'International Firms' },
             { icon: '📐', title: 'Landscape Architect' },
         ]}
-        iframeLink="https://stobay.ai/rathnam_university/architecture/?type=widget"
+        // iframeLink="https://stobay.ai/rathnam_university/architecture/?type=widget"
+        ChatLink="https://stobay.ai/rathnam_university/architecture/?type=chatbox"
     />
 );
 

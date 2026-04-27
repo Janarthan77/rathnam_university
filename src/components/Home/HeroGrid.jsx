@@ -5,7 +5,7 @@ import { ChevronRight, Play, Award, Users, BookOpen, Star } from 'lucide-react';
 
 const slides = [
     {
-        bg: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=1600',
+        // bg: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=1600',
         badge: 'Welcome to Excellence',
         title: 'Shape Your Future',
         subtitle: 'with World-Class Education',
@@ -14,7 +14,7 @@ const slides = [
         ctaLink: '#courses',
     },
     {
-        bg: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1600',
+        // bg: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1600',
         badge: 'RSMART Premium',
         title: 'Premium Learning',
         subtitle: 'Unmatched in the Region',
@@ -23,7 +23,7 @@ const slides = [
         ctaLink: '/courses/rsmart',
     },
     {
-        bg: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=1600',
+        // bg: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=1600',
         badge: 'Healthcare & Life Sciences',
         title: 'Heal, Innovate,',
         subtitle: 'Lead the Future',
@@ -49,7 +49,7 @@ const Hero = () => {
                 <motion.div
                     key={current}
                     className="hero-bg"
-                    style={{ backgroundImage: `url(${slide.bg})` }}
+                    // style={{ backgroundImage: `url(${slide.bg})` }}
                     initial={{ opacity: 0, scale: 1.05 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}

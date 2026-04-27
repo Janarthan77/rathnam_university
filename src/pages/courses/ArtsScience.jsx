@@ -47,7 +47,8 @@ const ArtsScience = () => (
             { icon: '📋', title: 'HR Manager' },
             { icon: '✈️', title: 'Tourism & Hospitality' },
         ]}
-        iframeLink="https://stobay.ai/rathnam_university/arts/?type=widget"
+        // iframeLink="https://stobay.ai/rathnam_university/arts/?type=widget"
+        ChatLink="https://stobay.ai/rathnam_university/arts/?type=chatbox"
     />
 );
 

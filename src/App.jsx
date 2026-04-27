@@ -9,9 +9,6 @@ import Hero from './components/Home/HeroGrid'
 import CoursesSection from './components/Home/CoursesSection'
 import QuickStats from './components/Home/QuickStats'
 import Rankings from './components/Home/Rankings'
-import ChancellorSection from './components/Home/ChancellorSection'
-import NewsSection from './components/Home/NewsSection'
-import AlumniSection from './components/Home/AlumniSection'
 
 // Course Pages
 import ArtsScience from './pages/courses/ArtsScience'
@@ -28,9 +25,6 @@ const HomePage = () => (
     <CoursesSection />
     <QuickStats />
     <Rankings />
-    {/* <ChancellorSection />
-    <NewsSection /> */}
-    <AlumniSection />
   </>
 )
 

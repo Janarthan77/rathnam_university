@@ -45,7 +45,8 @@ const Engineering = () => (
             { icon: '🔬', title: 'R&D Engineer' },
             { icon: '📊', title: 'Data Engineer' },
         ]}
-        iframeLink="https://stobay.ai/rathnam_university/engineering/?type=widget"
+        // iframeLink="https://stobay.ai/rathnam_university/engineering/?type=widget"
+        ChatLink="https://stobay.ai/rathnam_university/engineering/?type=chatbox"
     />
 );
 

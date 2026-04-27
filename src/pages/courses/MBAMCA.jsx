@@ -41,7 +41,8 @@ const MBAMCA = () => (
             { icon: '📱', title: 'Product Manager' },
             { icon: '🤝', title: 'Management Consultant' },
         ]}
-        iframeLink="https://stobay.ai/rathnam_university/mba/?type=widget"
+        // iframeLink="https://stobay.ai/rathnam_university/mba/?type=widget"
+        ChatLink="https://stobay.ai/rathnam_university/mba/?type=chatbox"
     />
 );
 

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Clock, Users, Award, BookOpen, CheckCircle, ChevronRight } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { ArrowLeft, Clock, Users, Award, BookOpen, CheckCircle, ChevronRight, MessageCircle, Sparkles, Bot } from 'lucide-react';
 import ChatWidget from '../Layout/ChatWidget';
 
 const CoursePage = ({
@@ -19,7 +19,45 @@ const CoursePage = ({
     programs,
     careerPaths,
     iframeLink,
+    ChatLink,
 }) => {
+    const chatSectionRef = useRef(null);
+    const location = useLocation();
+
+    const agentKeywords = [
+        { word: 'Admissions', color: '#FF6B6B' },
+        { word: 'Fee Structure', color: '#FFD93D' },
+        { word: 'Eligibility', color: '#6BCB77' },
+        { word: 'Scholarships', color: '#4D96FF' },
+        { word: 'Career Paths', color: '#FF922B' },
+        { word: 'Programs', color: '#CC5DE8' },
+        { word: 'Campus Life', color: '#20C997' },
+        { word: 'Placements', color: '#F06595' },
+    ];
+    const [kwIndex, setKwIndex] = useState(0);
+    const [fade, setFade] = useState(true);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setFade(false);
+            setTimeout(() => {
+                setKwIndex(i => (i + 1) % agentKeywords.length);
+                setFade(true);
+            }, 300);
+        }, 2200);
+        return () => clearInterval(interval);
+    }, []);
+
+    // When navigating from home with openChat state, scroll to chat section
+    useEffect(() => {
+        if (location.state?.openChat && chatSectionRef.current) {
+            const timer = setTimeout(() => {
+                chatSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 600);
+            return () => clearTimeout(timer);
+        }
+    }, [location.state]);
+
     return (
         <div className="course-page">
             {/* Hero */}
@@ -152,10 +190,249 @@ const CoursePage = ({
                 </div>
             </section>
 
-            <ChatWidget iframeLink={iframeLink} />
+            {/* Embedded AI Chat Section */}
+            {ChatLink && (
+                <section
+                    id="ai-chat"
+                    className="cp-chat-section"
+                    ref={chatSectionRef}
+                >
+                    <div className="container">
+                        <motion.div
+                            className="cp-chat-header"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5 }}
+                        >
+                            <div className="cp-chat-badge">
+                                <Sparkles size={14} />
+                                AI Powered
+                            </div>
+                            <h2>Ask Our AI <span className="highlight-agent">Agent</span> Counsellor</h2>
+
+                            {/* Rotating keyword chips */}
+                            <div className="cp-agent-topics">
+                                <span className="cp-agent-label">Ask me about</span>
+                                {agentKeywords.map((kw, i) => (
+                                    <motion.span
+                                        key={kw.word}
+                                        className={`cp-kw-chip ${i === kwIndex ? 'active' : ''}`}
+                                        style={{
+                                            '--kw-color': kw.color,
+                                            background: i === kwIndex
+                                                ? `${kw.color}22`
+                                                : 'rgba(255,255,255,0.05)',
+                                            borderColor: i === kwIndex
+                                                ? kw.color
+                                                : 'rgba(255,255,255,0.1)',
+                                            color: i === kwIndex ? kw.color : 'rgba(255,255,255,0.35)',
+                                        }}
+                                        animate={{
+                                            scale: i === kwIndex ? 1.08 : 1,
+                                            opacity: i === kwIndex ? 1 : 0.45,
+                                        }}
+                                        transition={{ duration: 0.35, ease: 'easeOut' }}
+                                    >
+                                        {i === kwIndex && (
+                                            <motion.span
+                                                className="cp-kw-dot"
+                                                style={{ background: kw.color }}
+                                                animate={{ opacity: [1, 0.3, 1] }}
+                                                transition={{ duration: 1, repeat: Infinity }}
+                                            />
+                                        )}
+                                        {kw.word}
+                                    </motion.span>
+                                ))}
+                            </div>
+
+                            <p className="cp-chat-subtext">
+                                Get instant answers about <strong style={{ color: 'rgba(255,255,255,0.9)' }}>{name}</strong> — just type your question below!
+                            </p>
+                        </motion.div>
+                        <motion.div
+                            className="cp-chat-frame-wrapper"
+                            initial={{ opacity: 0, y: 30, scale: 0.97 }}
+                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: 0.1 }}
+                        >
+                            <div className="cp-chat-glow" style={{ background: gradient }} />
+                            <div className="cp-chat-frame-inner">
+                                <div className="cp-chat-topbar" style={{ background: gradient }}>
+                                    <div className="cp-chat-topbar-dot" />
+                                    <div className="cp-chat-topbar-dot" />
+                                    <div className="cp-chat-topbar-dot" />
+                                    <Bot size={18} />
+                                    <span>{name} AI Assistant</span>
+                                </div>
+                                <iframe
+                                    src={ChatLink}
+                                    className="cp-chat-iframe"
+                                    allow="microphone"
+                                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                                    frameBorder="0"
+                                    title={`${name} AI Chat`}
+                                />
+                            </div>
+                        </motion.div>
+                    </div>
+                </section>
+            )}
+
+            {/* Floating Chat Widget */}
+            {/* <ChatWidget iframeLink={iframeLink} /> */}
 
             <style>{`
                 .course-page { padding-top: 0; }
+
+                /* ── AI Chat Section ── */
+                .cp-chat-section {
+                    padding: 80px 0 100px;
+                    background: linear-gradient(160deg, #0f0f1e 0%, #1a1a3e 50%, #0f0f1e 100%);
+                    position: relative;
+                    overflow: hidden;
+                }
+                .cp-chat-section::before {
+                    content: '';
+                    position: absolute;
+                    top: -120px; left: 50%;
+                    transform: translateX(-50%);
+                    width: 700px; height: 700px;
+                    background: radial-gradient(circle, rgba(232,101,10,0.12) 0%, transparent 70%);
+                    pointer-events: none;
+                }
+                .cp-chat-header {
+                    text-align: center;
+                    margin-bottom: 48px;
+                }
+                .cp-chat-header h2 {
+                    font-size: clamp(1.8rem, 4vw, 2.8rem);
+                    font-weight: 900;
+                    color: white;
+                    font-family: 'Outfit', sans-serif;
+                    margin: 12px 0 14px;
+                }
+                .highlight-agent {
+                    background: linear-gradient(135deg, #E8650A, #FFB347);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    position: relative;
+                    text-shadow: 0 10px 20px rgba(232,101,10,0.2);
+                }
+                .cp-agent-topics {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                    margin: 20px auto 25px;
+                    max-width: 700px;
+                }
+                .cp-agent-label {
+                    color: rgba(255,255,255,0.4);
+                    font-size: 0.85rem;
+                    font-weight: 600;
+                    margin-right: 5px;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                }
+                .cp-kw-chip {
+                    padding: 6px 14px;
+                    border-radius: 50px;
+                    font-size: 0.82rem;
+                    font-weight: 700;
+                    border: 1px solid transparent;
+                    transition: all 0.3s ease;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    white-space: nowrap;
+                }
+                .cp-kw-dot {
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                }
+                .cp-chat-subtext {
+                    color: rgba(255,255,255,0.5);
+                    font-size: 0.95rem;
+                    max-width: 540px;
+                    margin: 0 auto;
+                    line-height: 1.6;
+                }
+                .cp-chat-badge {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                    background: rgba(232,101,10,0.18);
+                    border: 1px solid rgba(232,101,10,0.35);
+                    color: #FFB347;
+                    padding: 6px 16px;
+                    border-radius: 50px;
+                    font-size: 0.78rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    margin-bottom: 4px;
+                }
+                .cp-chat-frame-wrapper {
+                    position: relative;
+                    width: 100%;
+                    height: auto;
+                    margin: 0 auto;
+                }
+                .cp-chat-glow {
+                    position: absolute;
+                    inset: -2px;
+                    border-radius: 26px;
+                    opacity: 0.6;
+                    filter: blur(20px);
+                    z-index: 0;
+                }
+                .cp-chat-frame-inner {
+                    position: relative;
+                    z-index: 1;
+                    background: #fff;
+                    border-radius: 24px;
+                    overflow: hidden;
+                    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
+                    display: flex;
+                    flex-direction: column;
+                    height: 80vh;
+                }
+                .cp-chat-topbar {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 14px 20px;
+                    color: white;
+                    font-size: 0.88rem;
+                    font-weight: 700;
+                    font-family: 'Outfit', sans-serif;
+                    flex-shrink: 0;
+                }
+                .cp-chat-topbar-dot {
+                    width: 12px; height: 12px;
+                    border-radius: 50%;
+                    background: rgba(255,255,255,0.4);
+                }
+                .cp-chat-topbar-dot:first-child { background: rgba(255,100,100,0.8); }
+                .cp-chat-topbar-dot:nth-child(2) { background: rgba(255,200,0,0.8); }
+                .cp-chat-topbar-dot:nth-child(3) { background: rgba(100,220,100,0.8); }
+                .cp-chat-topbar svg { margin-left: auto; opacity: 0.85; }
+                .cp-chat-topbar span { margin-left: 2px; }
+                .cp-chat-iframe {
+                    flex: 1;
+                    width: 100%;
+                    border: none;
+                    background: #fafafa;
+                }
+                @media (max-width: 768px) {
+                    .cp-chat-frame-inner { height: 500px; }
+                    .cp-chat-section { padding: 60px 0 80px; }
+                }
 
                 .cp-hero {
                     position: relative;

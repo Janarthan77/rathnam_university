@@ -40,7 +40,8 @@ const BPharm = () => (
             { icon: '🔒', title: 'Drug Regulatory Affairs' },
             { icon: '✈️', title: 'Pharma Export & Import' },
         ]}
-        iframeLink="https://stobay.ai/rathnam_university/pharmacy/?type=widget"
+        // iframeLink="https://stobay.ai/rathnam_university/pharmacy/?type=widget"
+        ChatLink="https://stobay.ai/rathnam_university/pharmacy/?type=chatbox"
     />
 );
 

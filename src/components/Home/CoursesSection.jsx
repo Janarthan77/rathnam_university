@@ -132,7 +132,11 @@ const CoursesSection = () => {
                                 ))}
                             </div>
 
-                            <Link to={course.path} className="course-link">
+                            <Link
+                                to={course.path}
+                                state={{ openChat: true }}
+                                className="course-link"
+                            >
                                 Explore <ArrowRight size={16} />
                             </Link>
                         </motion.div>

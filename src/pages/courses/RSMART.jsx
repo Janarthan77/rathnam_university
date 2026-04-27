@@ -43,7 +43,8 @@ const RSMART = () => (
             { icon: '🚀', title: 'Product Manager' },
             { icon: '🤝', title: 'IT Consultant' },
         ]}
-        iframeLink="https://stobay.ai/rathnam_university/rsmart/?type=widget"
+        // iframeLink="https://stobay.ai/rathnam_university/rsmart/?type=widget"
+        ChatLink="https://stobay.ai/rathnam_university/rsmart/?type=chatbox"
     />
 );
 
