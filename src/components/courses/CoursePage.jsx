@@ -88,7 +88,7 @@ const CoursePage = ({
             </div>
 
             {/* About */}
-            <section className="cp-about">
+            {/* <section className="cp-about">
                 <div className="container cp-two-col">
                     <motion.div
                         className="cp-about-text"
@@ -119,7 +119,7 @@ const CoursePage = ({
             </section>
 
             {/* Programs */}
-            <section id="programs" className="cp-programs">
+            {/* <section id="programs" className="cp-programs">
                 <div className="container">
                     <div className="section-header">
                         <span className="badge-sm">Programs Offered</span>
@@ -146,10 +146,10 @@ const CoursePage = ({
                         ))}
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             {/* Career Paths */}
-            <section className="cp-career">
+            {/* <section className="cp-career">
                 <div className="container">
                     <div className="section-header">
                         <span className="badge-sm">Career Opportunities</span>
@@ -174,10 +174,10 @@ const CoursePage = ({
                         ))}
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             {/* CTA */}
-            <section className="cp-cta" style={{ background: gradient }}>
+            {/* <section className="cp-cta" style={{ background: gradient }}>
                 <div className="container cp-cta-inner">
                     <div>
                         <h2>Ready to Join {name}?</h2>
@@ -188,7 +188,7 @@ const CoursePage = ({
                         <a href="tel:+914222345678" className="cta-btn-ghost">📞 Contact Admissions</a>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             {/* Embedded AI Chat Section */}
             {ChatLink && (
@@ -260,13 +260,13 @@ const CoursePage = ({
                         >
                             <div className="cp-chat-glow" style={{ background: gradient }} />
                             <div className="cp-chat-frame-inner">
-                                <div className="cp-chat-topbar" style={{ background: gradient }}>
+                                {/* <div className="cp-chat-topbar" style={{ background: gradient }}>
                                     <div className="cp-chat-topbar-dot" />
                                     <div className="cp-chat-topbar-dot" />
                                     <div className="cp-chat-topbar-dot" />
                                     <Bot size={18} />
                                     <span>{name} AI Assistant</span>
-                                </div>
+                                </div> */}
                                 <iframe
                                     src={ChatLink}
                                     className="cp-chat-iframe"
