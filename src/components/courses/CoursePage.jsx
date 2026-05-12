@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowLeft, Clock, Users, Award, BookOpen, CheckCircle, ChevronRight, MessageCircle, Sparkles, Bot } from 'lucide-react';
+import { ArrowLeft, Clock, Users, Award, BookOpen, CheckCircle, ChevronRight, MessageCircle, Sparkles, Bot, Phone } from 'lucide-react';
 import ChatWidget from '../Layout/ChatWidget';
 
 const CoursePage = ({
@@ -78,10 +78,19 @@ const CoursePage = ({
                             <span><Award size={15} /> {eligibility}</span>
                         </div>
                         <div className="cp-hero-actions">
-                            <a href="#programs" className="cp-btn-primary" style={{ background: gradient }}>
+                            <motion.a
+                                href="#programs"
+                                className="cp-btn-primary cp-btn-glow"
+                                style={{ background: gradient }}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.98 }}
+                            >
                                 View Programs <ChevronRight size={16} />
-                            </a>
-                            <Link to="/" className="cp-btn-ghost">Apply Now</Link>
+                                <div className="cp-btn-shimmer" />
+                            </motion.a>
+                            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+                                <Link to="/" className="cp-btn-ghost">Apply Now</Link>
+                            </motion.div>
                         </div>
                     </motion.div>
                 </div>
@@ -250,6 +259,23 @@ const CoursePage = ({
                             <p className="cp-chat-subtext">
                                 Get instant answers about <strong style={{ color: 'rgba(255,255,255,0.9)' }}>{name}</strong> — just type your question below!
                             </p>
+                            <div className="cp-contact-wrapper">
+                                <motion.a
+                                    href="tel:+917845883006"
+                                    className="cp-btn-primary cp-btn-glow"
+                                    style={{ background: gradient }}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.98 }}
+                                >
+                                    <Phone size={18} />
+                                    <span>Contact Admissions</span>
+                                    <div className="cp-btn-shimmer" />
+                                </motion.a>
+                                <span className="cp-contact-hint">
+                                    <span className="hint-dot" />
+                                    Admissions Helpline: +91 78458 83006
+                                </span>
+                            </div>
                         </motion.div>
                         <motion.div
                             className="cp-chat-frame-wrapper"
@@ -376,6 +402,73 @@ const CoursePage = ({
                     text-transform: uppercase;
                     letter-spacing: 1px;
                     margin-bottom: 4px;
+                }
+                .cp-contact-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 12px;
+                    margin-top: 32px;
+                }
+                .cp-contact-hint {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    color: rgba(255,255,255,0.4);
+                    font-size: 0.8rem;
+                    font-weight: 500;
+                    letter-spacing: 0.5px;
+                }
+                .hint-dot {
+                    width: 6px;
+                    height: 6px;
+                    background: #10B981;
+                    border-radius: 50%;
+                    box-shadow: 0 0 10px #10B981;
+                    animation: pulse 2s infinite;
+                }
+                @keyframes pulse {
+                    0% { opacity: 1; transform: scale(1); }
+                    50% { opacity: 0.5; transform: scale(1.2); }
+                    100% { opacity: 1; transform: scale(1); }
+                }
+                .cp-btn-glow {
+                    position: relative;
+                    overflow: hidden;
+                    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+                }
+                .cp-btn-glow::after {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    background: inherit;
+                    filter: blur(15px);
+                    opacity: 0;
+                    transition: 0.3s;
+                    z-index: -1;
+                }
+                .cp-btn-glow:hover::after {
+                    opacity: 0.6;
+                    transform: scale(1.1);
+                }
+                .cp-btn-shimmer {
+                    position: absolute;
+                    top: 0;
+                    left: -100%;
+                    width: 50%;
+                    height: 100%;
+                    background: linear-gradient(
+                        90deg,
+                        transparent,
+                        rgba(255,255,255,0.2),
+                        transparent
+                    );
+                    transform: skewX(-20deg);
+                    animation: shimmer 3s infinite;
+                }
+                @keyframes shimmer {
+                    0% { left: -100%; }
+                    100% { left: 200%; }
                 }
                 .cp-chat-frame-wrapper {
                     position: relative;
