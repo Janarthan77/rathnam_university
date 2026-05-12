@@ -268,7 +268,7 @@ const CoursePage = ({
                                     whileTap={{ scale: 0.98 }}
                                 >
                                     <Phone size={18} />
-                                    <span>Contact Admissions</span>
+                                    <span>Call Us</span>
                                     <div className="cp-btn-shimmer" />
                                 </motion.a>
                                 <span className="cp-contact-hint">

@@ -74,7 +74,7 @@ const Navbar = () => {
                         <Link to="/#contact" className="btn-enroll">Enroll Now</Link>
                     </li> */}
                     <li className="nav-item">
-                        <a href="tel:+917845883006" className="btn-enroll">Contact Us</a>
+                        <a href="tel:+917845883006" className="btn-enroll">Call Us</a>
                     </li>
                 </ul>
 
@@ -104,7 +104,7 @@ const Navbar = () => {
                         <a href="/#about" className="mob-link">About</a>
                         <a href="/#stats" className="mob-link">Stats</a>
                         {/* <a href="/" className="mob-enroll">Enroll Now</a> */}
-                        <a href="tel:+917845883006" className="mob-link btn-enroll">Contact Us</a>
+                        <a href="tel:+917845883006" className="mob-link btn-enroll">Call Us</a>
                     </motion.div>
                 )}
             </AnimatePresence>
